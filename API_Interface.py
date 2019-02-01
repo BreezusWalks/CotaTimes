@@ -20,16 +20,16 @@ def findDriversID(driverName):
     df.set_index('id', inplace=True)
     return df
 
-def getDriversRaces(racerID):
-    request_url = base_url + 'racers/' + str(racerID) + '/races.json?&' + tokens_dict['main_key']
+def getDriversRaces(driverID):
+    request_url = base_url + 'racers/' + str(driverID) + '/races.json?&' + tokens_dict['main_key']
     races_by_driver = requests.get(request_url).json()
 
     df = pd.DataFrame(races_by_driver['heats'])
     df.set_index('id', inplace=True)
     return df
 
-def getDriversInfo(racerID):
-    request_url = base_url + 'racers/' + str(racerID) + '.json?' + tokens_dict['main_key']
+def getDriversInfo(driverID):
+    request_url = base_url + 'racers/' + str(driverID) + '.json?' + tokens_dict['main_key']
     driver_info = requests.get(request_url).json()
 
     driver_info['racer'].update(driver_info['racer'].pop('name'))
@@ -59,7 +59,6 @@ def getRaceLapData(raceID):
         df.set_index('lap_number', inplace=True)
         driver_lap_dfs.append(df)
     return driver_lap_dfs
-
 
 def getRaceResults(raceID):
     request_url = base_url + 'races/' + str(raceID) + '.json?' + tokens_dict['main_key']
