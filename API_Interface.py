@@ -8,7 +8,7 @@ with open('TokenKeys.csv', 'r') as token_file:
     tokens = csv.reader(token_file, delimiter=',')
     tokens_dict = {}
     for token in tokens:
-        tokens_dict.update({token[0]: token[1]})
+        tokens_dict[token[0]] = token[1]
 
 def findDriversID(driverName):
     request_url = base_url + 'racers/search.json?query=' + driverName.replace(' ', '%20') + '&' + tokens_dict['main_key']
