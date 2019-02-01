@@ -3,7 +3,6 @@ import pandas as pd
 import csv
 
 base_url = 'http://cotaaustin.clubspeedtiming.com/api/index.php/'
-pd.set_option('display.max_columns', 20)
 
 with open('TokenKeys.csv', 'r') as token_file:
     tokens = csv.reader(token_file, delimiter=',')
@@ -59,7 +58,6 @@ def getRaceLapData(raceID):
         df = pd.DataFrame(driver['laps'])
         df.set_index('lap_number', inplace=True)
         driver_lap_dfs.append(df)
-
     return driver_lap_dfs
 
 
@@ -77,7 +75,4 @@ def getRaceData(raceID):
     driver_data = getRaceDriverData(raceID)
     lap_data = getRaceLapData(raceID)
     results = getRaceResults(raceID)
-
     return driver_data, lap_data, results
-
-print(findDriversID("Kellen Miller"))
